@@ -17,3 +17,13 @@ def create_curso(curso):
         descricao = curso_bd.descricao,
         data_publicacao = curso_bd.data_publicacao
     )
+
+def listar_cursos():
+    cursos = curso_model.Curso.query.all()
+
+    return [curso_model.Curso(
+        id = curso.id,
+        nome = curso.nome,
+        descricao = curso.descricao,
+        data_publicacao = curso.data_publicacao
+    ) for curso in cursos]

@@ -11,7 +11,10 @@ from ..models import curso_model
 
 class CursoList(Resource):
     def get(self):
-        return {"message": "Estudando API com Flask"}
+        cursos = curso_service.listar_cursos()
+        cs = curso_schema.CursoSchema(many=True)
+
+        return make_response(cs.jsonify(cursos), 200)
 
     def post(self):
         cs = curso_schema.CursoSchema()
