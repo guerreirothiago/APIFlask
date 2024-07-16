@@ -1,3 +1,4 @@
+from api.entidades import curso
 from ..models import curso_model
 from api import db
 
@@ -27,3 +28,13 @@ def listar_cursos():
         descricao = curso.descricao,
         data_publicacao = curso.data_publicacao
     ) for curso in cursos]
+
+def listar_curso_id(id):
+    curso = curso_model.Curso.query.filter_by(id = id).first()
+
+    return curso_model.Curso(
+        id = curso.id,
+        nome = curso.nome,
+        descricao = curso.descricao,
+        data_publicacao = curso.data_publicacao
+    )
