@@ -30,11 +30,13 @@ def listar_cursos():
     ) for curso in cursos]
 
 def listar_curso_id(id):
-    curso = curso_model.Curso.query.filter_by(id = id).first()
+    return curso_model.Curso.query.filter_by(id=id).first()
 
-    return curso_model.Curso(
-        id = curso.id,
-        nome = curso.nome,
-        descricao = curso.descricao,
-        data_publicacao = curso.data_publicacao
-    )
+
+def atualiza_curso(curso_anterior, curso_novo):
+    curso_anterior.nome = curso_novo.nome
+    curso_anterior.descricao = curso_novo.descricao
+    curso_anterior.data_publicacao = curso_novo.data_publicacao
+    db.session.commit()
+    print(f"Curso atualizado: {curso_anterior.nome}, {curso_anterior.descricao}, {curso_anterior.data_publicacao}")
+    return curso_anterior
