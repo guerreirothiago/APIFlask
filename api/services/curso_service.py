@@ -40,3 +40,7 @@ def atualiza_curso(curso_anterior, curso_novo):
     db.session.commit()
     print(f"Curso atualizado: {curso_anterior.nome}, {curso_anterior.descricao}, {curso_anterior.data_publicacao}")
     return curso_anterior
+
+def deleta_curso(curso):
+    db.session.delete(curso)
+    db.session.commit()
