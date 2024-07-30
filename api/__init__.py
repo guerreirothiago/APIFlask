@@ -15,4 +15,4 @@ ma = Marshmallow(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
-from api.views import curso_views  # Certifique-se de que suas views estão importadas
+from api.views import curso_views, formacao_views  # Certifique-se de que suas views estão importadas

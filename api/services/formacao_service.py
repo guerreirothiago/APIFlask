@@ -2,32 +2,27 @@ from api.entidades import formacao
 from ..models import formacao_model
 from api import db
 
-def create_curso(formacao):
-    formacao_bd = formacao_model.Curso(
-        nome = formacao.nome,
-        descricao = formacao.descricao
+def create_formacao(formacao_entidade):
+    nova_formacao = formacao_model.Formacao(
+        nome=formacao_entidade.nome,
+        descricao=formacao_entidade.descricao
     )
-
-    db.session.add(formacao_bd)
+    db.session.add(nova_formacao)
     db.session.commit()
+    print(f"Formacao criada: {nova_formacao.nome}, {nova_formacao.descricao}")
+    return nova_formacao
 
-    return formacao_model.Curso(
-        id = formacao_bd.id,
-        nome = formacao_bd.nome,
-        descricao = formacao_bd.data_publicacao
-    )
+def listar_formacoes():
+    cursos = formacao_model.Formacao.query.all()
 
-def listar_cursos():
-    cursos = formacao_model.Curso.query.all()
-
-    return formacao_model.Curso(
+    return [formacao_model.Formacao(
         id = formacao.id,
         nome = formacao.nome,
         descricao = formacao.descricao
-    )
+    ) for formacao in cursos]
 
-def listar_curso_id(id):
-    return formacao_model.Curso.query.filter_by(id=id).first()
+def listar_formacao_id(id):
+    return formacao_model.Formacao.query.filter_by(id=id).first()
 
 
 def atualiza_formacao(formacao_anterior, formacao_novo):
